@@ -8,13 +8,32 @@
 </head>
 <body>
     <h1>Aerial Photographs</h1>
-    <div id="map_mount_point"></div>
     
     <script>
-      
+
+        //Width and height
+        var w = 400;
+        var h = 600;
+    
+        // import
         d3.xml("static/map.svg", "image/svg+xml", function(error, xml) {
             if (error) throw error;
-            document.body.appendChild(xml.documentElement);
+
+            var importedNode = document.importNode(xml.documentElement, true);
+            document.body.appendChild(importedNode);
+
+            var svg = d3.select("svg")
+                .attr("width", w)
+                .attr("height", h)
+
+            var polygons = d3.selectAll("polygon")
+                .on('mouseover', function(d){
+                    d3.select(this).classed("active", true)
+                })
+                .on('mouseout', function(d) {
+                    d3.select(this).classed("active", false)
+                })
+                
         })
 
     </script>

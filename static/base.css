@@ -2,3 +2,11 @@ body {
     padding-left: 1rem;
     background-color: #ddd;
 }
+
+polygon {
+    fill: white;
+}
+
+polygon.active {
+    fill: red;
+}

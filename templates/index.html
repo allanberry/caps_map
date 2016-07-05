@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map</title>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
+    <link rel="stylesheet" type="text/css" href="static/base.css" />
+</head>
+<body>
+    <h1>Aerial Photographs</h1>
+    <div id="map_mount_point"></div>
+    
+    <script>
+      
+        d3.xml("static/map.svg", "image/svg+xml", function(error, xml) {
+            if (error) throw error;
+            document.body.appendChild(xml.documentElement);
+        })
+
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@ from collections import OrderedDict as OD
 
 json_file   = open("index.json", 'r')
 svg_in      = open("index.svg",  'r')
-svg_out     = open("output.svg", 'w')
+svg_out     = open("static/map.svg", 'w')
 
 col_dict_from_json = json.loads(json_file.read())
 neworder = sorted(col_dict_from_json.keys())

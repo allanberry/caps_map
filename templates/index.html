@@ -11,14 +11,13 @@
 
 </head>
 <body>
-    <h1>Aerial Photographs</h1>
+    <h1>CAPS index</h1>
     <div class="container">
         <div class="row">
             <div class="column" id="map">
-                <h4>Map</h4>
             </div>
             <div class="column" id="controls">
-                <h4>Controls</h4>
+                <p>Last clicked: <span id="output_tile_name"></span></p>
             </div>
         </div>
     </div>
@@ -42,7 +41,10 @@
                 .attr("width", w)
                 .attr("height", h)
 
-            // dress up svg polygons
+            // init output
+            output_tile_name()
+
+            // give hover feedback
             var polygons = d3.selectAll("polygon")
                 .on('mouseover', function(d){
                     d3.select(this).classed("active", true)
@@ -50,7 +52,21 @@
                 .on('mouseout', function(d) {
                     d3.select(this).classed("active", false)
                 })
+                .on('click', function(d) {
+                    var parent_id  = d3.select(this.parentNode).attr("id")
+                    var polygon_id = d3.select(this).attr("id")
+                    output_tile_name(parent_id + "-" + polygon_id)
+                })
         })
+
+        function output_tile_name(value) {
+            // default
+            var value = typeof value !== 'undefined' ? value : "None."
+
+            // get control, set output
+            var output = d3.select('#output_tile_name')
+            output.html(value)
+        }
 
     </script>
 </body>

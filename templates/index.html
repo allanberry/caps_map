@@ -3,34 +3,46 @@
 <head>
     <title>Map</title>
     <script src="//d3js.org/d3.v3.min.js"></script>
-    
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="static/base.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css" />
+    <link rel="stylesheet" href="static/base.css" />
 
 </head>
 <body>
     <h1>Aerial Photographs</h1>
-    
+    <div class="container">
+        <div class="row">
+            <div class="column" id="map">
+                <h4>Map</h4>
+            </div>
+            <div class="column" id="controls">
+                <h4>Controls</h4>
+            </div>
+        </div>
+    </div>
     <script>
 
-        //Width and height
-        var w = 400;
-        var h = 600;
-    
         // import
         d3.xml("static/map.svg", "image/svg+xml", function(error, xml) {
             if (error) throw error;
 
-            var importedNode = document.importNode(xml.documentElement, true);
-            document.body.appendChild(importedNode);
+            // svg into dom
+            var div_map = document.getElementById("map")
+            var importedNode = document.importNode(xml.documentElement, true)
+            div_map.appendChild(importedNode)
 
+            // svg w/h on page
+            var w = 400;
+            var h = 600;
+
+            // select svg for d3
             var svg = d3.select("svg")
                 .attr("width", w)
                 .attr("height", h)
 
+            // dress up svg polygons
             var polygons = d3.selectAll("polygon")
                 .on('mouseover', function(d){
                     d3.select(this).classed("active", true)
@@ -38,7 +50,6 @@
                 .on('mouseout', function(d) {
                     d3.select(this).classed("active", false)
                 })
-                
         })
 
     </script>

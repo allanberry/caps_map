@@ -1,6 +1,6 @@
 author: Allan Berry
 date: Fall 2016
----
+
 
 CAPS: Chicago Aerial Photograph Service
 ===

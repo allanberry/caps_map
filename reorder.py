@@ -2,6 +2,8 @@ import json
 import xmltodict
 from collections import OrderedDict as OD
 
+# A script for converting the Illustrator-generated SVG into one which could be used with D3.  Probably disposable, and certainly not well documented, but maybe it can help somebody.
+
 json_file   = open("index.json", 'r')
 svg_in      = open("index.svg",  'r')
 svg_out     = open("static/map.svg", 'w')
@@ -38,8 +40,5 @@ for i, g1 in enumerate(g_boxes_layer['g']):
             except IndexError as err:
                 m = len(col_dict_from_json[str(rowgroup_number)][row_letter])
                 print('Missing in {}{}, json count: {}, offset: {}'.format(rowgroup_number, row_letter, len(col_dict_from_json[str(rowgroup_number)][row_letter]), offset))
-
-
-
 
 svg_out.write(xmltodict.unparse(root, pretty=True))
